@@ -24,7 +24,7 @@ func Start(host string, port int) {
 
 	router.HandleFunc("/",func(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(200)
-	}).Methods("GET")
+	})
 
 	router.HandleFunc("/name/{PARAM}",func(rw http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
@@ -34,7 +34,8 @@ func Start(host string, port int) {
 
 	router.HandleFunc("/bad",func(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(500)
-	})
+	}).Methods("GET")
+
 	router.HandleFunc(`/data`   ,func(rw http.ResponseWriter, r *http.Request) {
 		data,err:=ioutil.ReadAll(r.Body)
 		if err !=nil {
